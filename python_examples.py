@@ -10,7 +10,7 @@ def function_one():
     connection = sqlite3.connect('my_database.db')
     cursor = connection.cursor()
 
-    cursor.execute(f"SELECT * FROM users WHERE id = {id}")
+    cursor.execute("SELECT * FROM users WHERE id = ?", (id,))
     result = cursor.fetchall()
     return str(result)
 
@@ -30,7 +30,7 @@ def function_two():
 def function_three():
     filename = request.args.get('filename')
 
-    result = os.popen(f'cat {filename}').read()
+    result = os.popen(['cat', filename]).read()
     return str(result)
 
 
