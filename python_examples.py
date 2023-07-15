@@ -5,7 +5,7 @@ import os
 app = Flask(__name__)
 
 @app.route("/r1")
-def vulnerable_sqli():
+def function_one():
     id = request.args.get('id')
     connection = sqlite3.connect('my_database.db')
     cursor = connection.cursor()
@@ -16,7 +16,7 @@ def vulnerable_sqli():
 
 
 @app.route("/r2")
-def secure_sqli():
+def function_two():
     id = request.args.get('id')
     connection = sqlite3.connect('my_database.db')
     cursor = connection.cursor()
@@ -27,7 +27,7 @@ def secure_sqli():
 
 
 @app.route("/r3")
-def vulnerable_cmd_injection():
+def function_three():
     filename = request.args.get('filename')
 
     result = os.popen(f'cat {filename}').read()
@@ -35,7 +35,7 @@ def vulnerable_cmd_injection():
 
 
 @app.route("/r4")
-def secure_cmd_injection():
+def function_four():
     filename = request.args.get('filename')
 
     with open(filename, 'r') as file:
